@@ -1,0 +1,30 @@
+{
+  "name": "hourm",
+  "version": "0.0.1",
+  "description": "A simple tool to help roleplay Garab Dohr speech",
+  "main": "App.js",
+  "scripts": {
+    "build": "webpack",
+    "serve": "webpack-dev-server --content-base dist/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Rodriguez",
+  "license": "ISC",
+  "dependencies": {
+	"ag-grid": "^6.0.0",
+    "ag-grid-react": "^6.0.0",
+
+    "ag-grid-enterprise": "^6.0.0",
+    
+	"babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "css-loader": "^0.26.0",
+    "file-loader": "^0.9.0",
+    "node-sass": "^3.13.0",
+    "sass-loader": "^4.0.2",
+    "semantic-ui-react": "^0.61.7",
+    "style-loader": "^0.13.1"
+  }
+}
