@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Button, Form, Input, TextArea } from 'semantic-ui-react';
-import AgGridReact from './AgGridReact.js';
+
+
 class App extends React.Component {
 	constructor(props){
 		super(props);
