@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Button, Form, Input, TextArea } from 'semantic-ui-react';
-
+import FooterPage from './FooterPage.js';
 
 class App extends React.Component {
 	constructor(props){
@@ -34,6 +34,7 @@ class App extends React.Component {
   render () {
 	const stylemap = require('./App.scss');
     return (
+	  <div>
 		<div className="contentBody">
 		<h1>Galeb Duhr Speech</h1>
 		<p>The Galeb Duhr have a particular speech pattern. This application can be used to make it easier to speak like a Galeb Duhr.</p>
@@ -74,7 +75,8 @@ class App extends React.Component {
 		Speech2 :
 		{this.state.converted_speech}
 		</div>
-		
+		<FooterPage />
+	  </div>
 	);
   }
 }
