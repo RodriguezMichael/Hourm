@@ -13,7 +13,7 @@ class App extends React.Component {
 			original_speech: ' ',
 			converted_speech : ' ',
 			value: '',
-			rowData: [{original: 'Test React', converted: 'Tessst Rreact'}],
+			rowData: [{original: 'Test React', converted: 'Webpack updated'}],
 			columnDefs:[
 					{headerName: 'Text', field: 'original'},
 					{headerName: 'Converted Text', field: 'converted'}
@@ -36,8 +36,11 @@ class App extends React.Component {
 	
 	storeSpeech(e){
 		console.log(this.state);
-		var _y = this.state.rowData;
-		_y.push({original:this.state.original_speech, converted: this.state.converted_speech})
+		
+		var _y = this.state.rowData.concat({
+			'original':this.state.original_speech, 
+			'converted': this.state.converted_speech
+			});
 		
 		this.setState({rowData:_y});
 		

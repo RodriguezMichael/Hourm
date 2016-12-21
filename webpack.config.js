@@ -6,21 +6,21 @@ var BUILD_DIR = path.resolve(__dirname, 'dist');
 var APP_DIR = path.resolve(__dirname, 'src');
 
 var config = {
-  //entry: APP_DIR + '/App.js',
-  entry: [
+  entry: APP_DIR + '/App.js',
+  /*entry: [
 	'webpack-dev-server/client?http://localhost:3000',
 	'webpack/hot/only-dev-server',
 	'./src/App'
-  ],
+  ],*/
   output: {
     path: BUILD_DIR,
     filename: 'index.js',
 	publicPath: 'dist/'
   },
   devtool: debug ? "inline-sourcemap" : null,
-  plugins: [
+  /*plugins: [
 	new webpack.HotModuleReplacementPlugin()
-  ],
+  ],*/
   resolve: {
 	  alias: {
 		"ag-grid-root" : __dirname + "/node_modules/ag-grid"
