@@ -2,6 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Button, Form, Input, TextArea } from 'semantic-ui-react';
 import FooterPage from './FooterPage.js';
+import AgGridExample from './AgGridExample.js';
+
+
 
 class App extends React.Component {
 	constructor(props){
@@ -9,8 +12,13 @@ class App extends React.Component {
 		this.state = {
 			original_speech: ' ',
 			converted_speech : ' ',
-			value: ''
-		}
+			value: '',
+			rowData: [{original: 'Test React', converted: 'Tessst Rreact'}],
+			columnDefs:[
+					{headerName: 'Text', field: 'original'},
+					{headerName: 'Converted Text', field: 'converted'}
+				]
+			}
 		this.onTextChange = this.onTextChange.bind(this);
 		this.storeSpeech = this.storeSpeech.bind(this);
 	}
@@ -28,7 +36,22 @@ class App extends React.Component {
 	
 	storeSpeech(e){
 		console.log(this.state);
-		return false;
+		var _y = this.state.rowData;
+		_y.push({original:this.state.original_speech, converted: this.state.converted_speech})
+		
+		this.setState({rowData:_y});
+		
+	}
+	
+	// in onGridReady, store the api for later use
+	onGridReady(params) {
+		this.api = params.api;
+		this.columnApi = params.columnApi;
+	}
+	// use the api some point later!
+	somePointLater() {
+		this.api.selectAll();
+		this.columnApi.setColumnVisible('country', visible);
 	}
 	
   render () {
@@ -68,12 +91,14 @@ class App extends React.Component {
 		</Form>
 		
 		<Button onClick={this.storeSpeech}>Store Speech</Button>
-		<br/>
-		Speech :
-		{this.state.original_speech}
-		<br/>
-		Speech2 :
-		{this.state.converted_speech}
+		<br/><br/>
+		
+		<AgGridExample 
+			onGridReady={this.onGridReady.bind(this)} 
+			columnDefs={this.state.columnDefs}
+			rowData={this.state.rowData}
+			/>
+		
 		</div>
 		<FooterPage />
 	  </div>

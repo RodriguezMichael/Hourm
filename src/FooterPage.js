@@ -11,8 +11,6 @@ class FooterPage extends React.Component {
 		return(
 			<footer>
 			Page made by Michael Rodriguez
-			<br />
-			Deloitte Consulting <Flag name='us'/>
 			<br/>
 			<a href="https://github.com/RodriguezMichael/hourm"
 				target="new">
