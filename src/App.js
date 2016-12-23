@@ -13,7 +13,7 @@ class App extends React.Component {
 			original_speech: ' ',
 			converted_speech : ' ',
 			value: '',
-			rowData: [{original: 'Test React', converted: 'Webpack updated'}],
+			rowData: [{original: 'update something', converted: 'Sample translated text'}],
 			columnDefs:[
 					{headerName: 'Text', field: 'original'},
 					{headerName: 'Converted Text', field: 'converted'}
@@ -21,6 +21,7 @@ class App extends React.Component {
 			}
 		this.onTextChange = this.onTextChange.bind(this);
 		this.storeSpeech = this.storeSpeech.bind(this);
+		this.rewindState = this.rewindState.bind(this);
 	}
 	
 	onTextChange(e,inText){
@@ -44,6 +45,20 @@ class App extends React.Component {
 		
 		this.setState({rowData:_y});
 		
+	}
+	
+	rewindState(){
+		console.log('updated');
+		//Does not rewind state, just removes the last item in the stored speech
+		/*console.log('this',this);
+		console.log(this.state);
+		if(this.state.rowData.length>1){
+			console.log('before splace', this.state.rowData);
+			let _y = this.state.rowData.splice(0,1);
+			console.log('after splice', this.state.rowData);
+			console.log('_y',_y);
+			
+		}*/
 	}
 	
 	// in onGridReady, store the api for later use
@@ -93,7 +108,9 @@ class App extends React.Component {
 			
 		</Form>
 		
+		<Button onClick={this.rewindState}>State</Button>
 		<Button onClick={this.storeSpeech}>Store Speech</Button>
+		
 		<br/><br/>
 		
 		<AgGridExample 

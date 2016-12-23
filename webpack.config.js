@@ -6,7 +6,10 @@ var BUILD_DIR = path.resolve(__dirname, 'dist');
 var APP_DIR = path.resolve(__dirname, 'src');
 
 var config = {
-  entry: APP_DIR + '/App.js',
+  //entry: APP_DIR + '/App.js',
+  entry: {
+	  app: ["./src/App.js"]
+  },
   /*entry: [
 	'webpack-dev-server/client?http://localhost:3000',
 	'webpack/hot/only-dev-server',
@@ -15,8 +18,10 @@ var config = {
   output: {
     path: BUILD_DIR,
     filename: 'index.js',
-	publicPath: 'dist/'
+	publicPath: '/dist/',
+	contentBase: 'dist/'
   },
+  devServer: { inline: true },
   devtool: debug ? "inline-sourcemap" : null,
   /*plugins: [
 	new webpack.HotModuleReplacementPlugin()
