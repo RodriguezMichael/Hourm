@@ -3,12 +3,13 @@ var webpack = require('webpack');
 var path = require('path');
 
 var BUILD_DIR = path.resolve(__dirname, 'dist');
-var APP_DIR = path.resolve(__dirname, 'src');
+var APP_DIR   = path.resolve(__dirname, 'src');
 
 var config = {
   //entry: APP_DIR + '/App.js',
   entry: {
-	  app: ["./src/App.js"]
+	  //app: ["./src/App.js"]
+	  app: ["./src/index.js"]
   },
   /*entry: [
 	'webpack-dev-server/client?http://localhost:3000',
@@ -27,6 +28,8 @@ var config = {
 	new webpack.HotModuleReplacementPlugin()
   ],*/
   resolve: {
+	  
+    extensions: ['', '.js', '.json'],
 	  alias: {
 		"ag-grid-root" : __dirname + "/node_modules/ag-grid"
 	  }
