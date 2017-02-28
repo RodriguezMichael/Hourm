@@ -6,23 +6,26 @@ var BUILD_DIR = path.resolve(__dirname, 'dist');
 var APP_DIR   = path.resolve(__dirname, 'src');
 
 var config = {
-  //entry: APP_DIR + '/App.js',
-  entry: {
-	  //app: ["./src/App.js"]
+  /*entry: {
 	  app: ["./src/index.js"]
+  },*/
+  devServer: {
+	contentBase: './dist',
+	hot: true,
+    inline: true,
+    color: true
   },
-  /*entry: [
-	'webpack-dev-server/client?http://localhost:3000',
+  entry: [
+	'webpack-dev-server/client?http://localhost:8080',
 	'webpack/hot/only-dev-server',
-	'./src/App'
-  ],*/
+	'./src/App.js'
+  ],
+  
   output: {
     path: BUILD_DIR,
     filename: 'index.js',
-	publicPath: '/dist/',
-	contentBase: 'dist/'
+    publicPath: '/',
   },
-  devServer: { inline: true },
   devtool: debug ? "inline-sourcemap" : null,
   /*plugins: [
 	new webpack.HotModuleReplacementPlugin()
@@ -36,17 +39,20 @@ var config = {
   },
   module : {
     loaders : [
-      { test : /\.jsx?/, include : APP_DIR, loader : 'babel' },
-	  /*{ 
+      /*{ test : /\.jsx?/, include : APP_DIR, loader : 'babel' },*/
+	  { 
 		test : /\.jsx?/, 
 		include : APP_DIR, 
 		loaders: ['react-hot','babel']
-	  },*/
+	  },
 	  { test : /\.scss$/, loader : 'style!css!sass' },
 	  { test: /\.css$/, loader: "style!css" }
       
     ]
-  }
+  },
+  plugins: [
+  new webpack.HotModuleReplacementPlugin()
+]
 };
 
 module.exports = config;

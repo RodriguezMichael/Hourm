@@ -1,32 +1,22 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { render } from 'react-dom';
 import { Button, Form, Input, TextArea } from 'semantic-ui-react';
+import { helloWorldConsole } from '../actions/hourmAction';
+//import * from '../actions';
 //import FooterPage from './FooterPage.js';
 //import AgGridExample from './AgGridExample.js';
-
+//import  stylemap from require('./App.scss');
 import { AgGridExample, FooterPage } from '../components';
 
-export default class App extends Component {
-	
-	
-	constructor(props){
+class HourmApp extends Component {
+	/*constructor(props){
 		super(props);
-		this.state = {
-			original_speech: ' ',
-			converted_speech : ' ',
-			value: '',
-			rowData: [{original: 'update something', converted: 'Sample translated text'}],
-			columnDefs:[
-					{headerName: 'Text', field: 'original'},
-					{headerName: 'Converted Text', field: 'converted'}
-				]
-			}
-		this.onTextChange = this.onTextChange.bind(this);
-		this.storeSpeech = this.storeSpeech.bind(this);
-		this.rewindState = this.rewindState.bind(this);
-	}
+	}*/
 	
-	onTextChange(e,inText){
+	
+	
+	/*onTextChange(e,inText){
 		var _x =  inText.value;
 		_x = String(_x).replace(/r/gi,'rr');
 		_x = String(_x).replace(/s/gi,'sss');
@@ -35,10 +25,9 @@ export default class App extends Component {
 			original_speech: inText.value,
 			converted_speech: _x
 		});
-	}
+	}*/
 	
-	storeSpeech(e){
-		console.log(this.state);
+	/*storeSpeech(e){
 		
 		var _y = this.state.rowData.concat({
 			'original':this.state.original_speech, 
@@ -46,31 +35,30 @@ export default class App extends Component {
 			});
 		
 		this.setState({rowData:_y});
-		
-	}
+	}*/
 	
-	rewindState(){
-		console.log('updated');
-	}
 	
 	// in onGridReady, store the api for later use
 	onGridReady(params) {
 		this.api = params.api;
 		this.columnApi = params.columnApi;
 	}
-	// use the api some point later!
-	somePointLater() {
-		this.api.selectAll();
-		this.columnApi.setColumnVisible('country', visible);
-	}
+	/*reduxPush() {
+		console.log(this);
+	}*/
 	
   render () {
 	const stylemap = require('./App.scss');
+	const { reduxPush, reduxTextChange, storeSpeech, value, original_speech, converted_speech, columnDefs, rowData } = this.props;
+	
+	{reduxPush()}
+	console.log(this.props);
     return (
 	  <div>
 		<div className="contentBody">
 		<h1>Galeb Duhr Speech</h1>
 		<p>The Galeb Duhr have a particular speech pattern. This application can be used to make it easier to speak like a Galeb Duhr.</p>
+		<p>Current text is converted as: {converted_speech}</p>
 		<Form>
 			<Form.Group widths='2'>
 				<Form.Field>
@@ -80,8 +68,9 @@ export default class App extends Component {
 						rows='3'
 						className="leftrightpad"
 						placeholder='Regular speech here' 
-						onChange={this.onTextChange}
-						value={this.state.value}
+						//onChange={this.onTextChange}
+						onChange={reduxTextChange}
+						value={value}
 						/>
 				</Form.Field>
 				<Form.Field>
@@ -90,9 +79,8 @@ export default class App extends Component {
 						size='big'
 						className="leftrightpad"
 						placeholder='Galeb Duhr speech will display here'
-						readOnly='true'
 						rows='3'
-						value={this.state.converted_speech}
+						value={converted_speech}
 						/>
 				</Form.Field>
 			</Form.Group>
@@ -100,15 +88,15 @@ export default class App extends Component {
 			
 		</Form>
 		
-		<Button onClick={this.rewindState}>State</Button>
-		<Button onClick={this.storeSpeech}>Store Speech</Button>
+		<Button onClick={storeSpeech}>Store Speech</Button>
+		<Button onClick={reduxPush}>Redux Push</Button>
 		
 		<br/><br/>
 		
 		<AgGridExample 
 			onGridReady={this.onGridReady.bind(this)} 
-			columnDefs={this.state.columnDefs}
-			rowData={this.state.rowData}
+			columnDefs={columnDefs}
+			rowData={rowData}
 			/>
 		
 		</div>
@@ -117,3 +105,31 @@ export default class App extends Component {
 	);
   }
 }
+HourmApp.propTypes = {
+	value: PropTypes.string.isRequired,
+	converted_speech: PropTypes.string.isRequired,
+	reduxPush: PropTypes.func.isRequired,
+	reduxTextChange: PropTypes.func.isRequired,
+	storeSpeech: PropTypes.func.isRequired
+}
+// Map Redux state to component props
+function mapStateToProps(state) {
+  return {
+    value: state.value,
+	converted_speech: state.converted_speech,
+	original_speech: state.original_speech
+  }
+}
+function mapDispatchToProps(dispatch) {
+	return{
+		reduxPush: () => dispatch({type:'add'}),
+		reduxTextChange: (e,inText) => dispatch({type:'convert', e, inText}),
+		storeSpeech: (e) => dispatch({type: 'store'})
+	}
+}
+const ExportHourmApp = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HourmApp)
+	
+export default ExportHourmApp;

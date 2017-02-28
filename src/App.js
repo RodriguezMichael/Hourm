@@ -77,7 +77,7 @@ class App extends React.Component {
     return (
 	  <div>
 		<div className="contentBody">
-		<h1>Galeb Duhr Speech</h1>
+		<h1>Translator:</h1>
 		<p>The Galeb Duhr have a particular speech pattern. This application can be used to make it easier to speak like a Galeb Duhr.</p>
 		<Form>
 			<Form.Group widths='2'>
